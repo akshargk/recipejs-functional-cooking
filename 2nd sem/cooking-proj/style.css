@@ -24,7 +24,6 @@ header {
 header h1{
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-
 }
 
 header p{
@@ -44,7 +43,8 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start; /* ✅ FIX */
 }
 
 /* Recipe Card */
@@ -54,9 +54,7 @@ main {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 1.5rem;
     width: 300px;
-
-    
-    /* transform 0.3s ease, box-shadow 0.3s ease */
+    align-self: flex-start; /* ✅ EXTRA SAFETY */
 }
 
 .recipe-card:hover {
@@ -91,25 +89,18 @@ main {
 }
 
 .difficulty.easy {
-    /* TODO: Add green background and dark green text */
     background-color: #d4edda;
     color: #155724;
 }
 
 .difficulty.medium {
-    /* TODO: Add yellow background and dark yellow text */
-    /* Use: background #fff3cd, color #856404 */
-
-    background-color:#fff3cd ;
+    background-color:#fff3cd;
     color: #856404;
 }
 
-
 .difficulty.hard {
-    /* TODO: Add red background and dark red text */
-    /* Use: background #f8d7da, color #721c24 */
-    background-color:#f8d7da ;
-    color: #721c24 ;
+    background-color:#f8d7da;
+    color: #721c24;
 }
 
 /* Controls Section */
@@ -126,13 +117,7 @@ main {
     margin-bottom: 1.5rem;
 }
 
-.filter-group:last-child,
-.sort-group:last-child {
-    margin-bottom: 0;
-}
-
 .controls h3 {
-    color: #333;
     font-size: 1rem;
     margin-bottom: 0.75rem;
     font-weight: 600;
@@ -144,7 +129,7 @@ main {
     gap: 0.75rem;
 }
 
-/* Filter and Sort Buttons */
+/* Buttons */
 .filter-btn,
 .sort-btn {
     padding: 0.6rem 1.2rem;
@@ -152,16 +137,8 @@ main {
     background: white;
     color: #667eea;
     border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.filter-btn:hover,
-.sort-btn:hover {
-    background: #f0f2ff;
-    transform: translateY(-2px);
 }
 
 .filter-btn.active,
@@ -170,19 +147,62 @@ main {
     color: white;
 }
 
-.filter-btn:active,
-.sort-btn:active {
-    transform: translateY(0);
+/* Toggle Buttons */
+.toggle-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .button-group {
-        flex-direction: column;
-    }
-    
-    .filter-btn,
-    .sort-btn {
-        width: 100%;
-    }
+.toggle-btn {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    background-color: #f0f2ff;
+    border: 1px solid #667eea;
+    color: #667eea;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggle-btn:hover {
+    background-color: #667eea;
+    color: white;
+}
+
+/* Expanded Content */
+.expanded-content {
+    border-top: 1px solid #eee; /* ✅ FIXED TYPO */
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.ingredients-list, .steps-list {
+    background: #fafafa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.ingredients-list h4, .steps-list h4 {
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+/* Recursive Steps */
+.steps-list ol, .steps-list ul {
+    padding-left: 1.2rem;
+}
+
+.nested-step {
+    list-style-type: none;
+    border-left: 2px dashed #cbd5e0;
+    padding-left: 1rem !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
